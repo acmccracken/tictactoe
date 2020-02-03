@@ -11,27 +11,39 @@ const row3 = [1, -1, -1];
 const grid = [row1, row2, row3];
 //winnerWinner will = [row1, row2, row3]; after testing
 const winnerWinner = [test1, test2, test3];
-let theWinner = 0;
+
 
 /*------Variables (state)------*/
 
 let theWinner = 0;
+let turn = 0;
 
 
 
 /*------Cached Element References------*/
-
+let clicker = document.querySelector('#board > button');
 
 
 /*------Event Listeners------*/
-document.getElementById('board')
-  .addEventListener('click', clickBoard);
+document.getElementById('board2').addEventListener('click', clickBoard);
+
+//document.getElementById('board')
+ // clicker.addEventListener('click', clickBoard);
 
 
 
 
 /*------Functions------*/
-init();
+
+function clickBoard(){
+    console.log(event.target.id)
+    let idx = event.target.id;
+    turn ++;
+    console.log(turn)
+    
+        
+    
+}
 
 function winCondition(){
       

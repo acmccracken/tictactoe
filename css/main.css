@@ -12,8 +12,13 @@ section.board {
     grid-template-columns: repeat(3, 14vmin);
     grid-gap: 0vmin;
 }
+section.board:hover {
+    cursor: pointer;
+    border-color: #E68B8B;
+    color: #E68B8B;
+}
 
-div {
+button {
     border: 3px solid black;
     font-size: 8vmin;
     text-align: center;
