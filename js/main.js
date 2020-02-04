@@ -8,9 +8,10 @@ const test3 = [0, 0, 0];
 const row1 = [0, 0, 0];
 const row2 = [0, 0, 0];
 const row3 = [0, 0, 0];
-const grid = [[row1],[row2], [row3]];
+const grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
+//const grid = [[row1],[row2], [row3]];
 //winnerWinner will = [row1, row2, row3]; after testing
-const winnerWinner = [[test1], [test2], [test3]];
+let winnerWinner = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
 
 /*------Variables (state)------*/
@@ -51,8 +52,7 @@ function clickBoard(){
         b = idx / 3;
         b = Math.floor(b);
     }
-    console.log(a)
-    console.log(b)
+    
     //if(grid[idx] !== 0) return;
     
     turnCount ++;
@@ -65,6 +65,7 @@ function clickBoard(){
 }
 
 function winCondition(){
+    winnerWinner = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
       
   for (i = 0, k = 2; i < 3; i ++){
 
@@ -112,8 +113,9 @@ function winCondition(){
     console.log("O wins");
   }
   
-        console.log(winnerWinner);
-        console.log(grid);
+  
+     //   console.log(winnerWinner);
+     //   console.log(grid);
     
 }
 
@@ -124,9 +126,13 @@ function render(){
     }else if(turn < 0){
         changeSquare.textContent = "O";
     }
-    grid[a][b] = turn;
+    console.log(a);
+    console.log(b);
+    grid[b][a] = turn;
+    console.log(grid);
+    console.log(winnerWinner);
     turn *= -1;
-    console.log(turn)
+    
     winCondition();
 
 
