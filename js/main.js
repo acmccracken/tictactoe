@@ -5,7 +5,7 @@ const test2 = [0, 0, 0];
 const test3 = [0, 0, 0];
 
 
-const row1 = [-1, 0, 1];
+const row1 = [-1, 0, 0];
 const row2 = [1, -1, 1];
 const row3 = [1, -1, -1];
 const grid = [row1, row2, row3];
@@ -16,30 +16,50 @@ const winnerWinner = [test1, test2, test3];
 /*------Variables (state)------*/
 
 let theWinner = 0;
-let turn = 0;
+let turn = 1;
+let turnCount = 0;
+let idx, a, b;
 
 
 
 /*------Cached Element References------*/
 let clicker = document.querySelector('#board > button');
+let playerTurn = document.getElementById('message');
 
 
 /*------Event Listeners------*/
 document.getElementById('board2').addEventListener('click', clickBoard);
 
-//document.getElementById('board')
- // clicker.addEventListener('click', clickBoard);
+
 
 
 
 
 /*------Functions------*/
+init();
+
+function init(){
+
+}
 
 function clickBoard(){
     console.log(event.target.id)
-    let idx = event.target.id;
-    turn ++;
-    console.log(turn)
+    idx = event.target.id;
+    a = idx % 3;
+    if(idx === 0){
+        b = 0
+    }else{
+        b = idx / 3;
+        b = Math.floor(b);
+    }
+    console.log(a)
+    console.log(b)
+    //if(grid[idx] !== 0) return;
+    
+    turnCount ++;
+    //winCondition();
+   
+    render(idx);
     
         
     
@@ -93,4 +113,16 @@ function winCondition(){
   }else if (theWinner < 0){
     console.log("O wins");
   }
+}
+
+function render(){
+    changeSquare = document.getElementById(idx);
+    if(turn > 0){
+        changeSquare.textContent = "X";
+    }else if(turn < 0){
+        changeSquare.textContent = "O";
+    }
+    turn *= -1;
+
+
 }

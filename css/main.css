@@ -14,8 +14,6 @@ section.board {
 }
 section.board:hover {
     cursor: pointer;
-    border-color: #E68B8B;
-    color: #E68B8B;
 }
 
 button {
