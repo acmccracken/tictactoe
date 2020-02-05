@@ -1,16 +1,6 @@
 /*------Constants------*/
-//const SQUARES = ["sq0, sq1, sq2, sq3, sq4, sq5, sq6, sq7, sq8"]
-const test1 = [0, 0, 0];
-const test2 = [0, 0, 0];
-const test3 = [0, 0, 0];
 
-
-const row1 = [0, 0, 0];
-const row2 = [0, 0, 0];
-const row3 = [0, 0, 0];
-const grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
-//const grid = [[row1],[row2], [row3]];
-//winnerWinner will = [row1, row2, row3]; after testing
+let grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
 let winnerWinner = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
 
@@ -24,12 +14,12 @@ let idx, a, b;
 
 
 /*------Cached Element References------*/
-let clicker = document.querySelector('#board > button');
 let playerTurn = document.getElementById('message');
 
 
 /*------Event Listeners------*/
-document.getElementById('board2').addEventListener('click', clickBoard);
+document.getElementById('grid').addEventListener('click', clickBoard);
+document.getElementById('btn').addEventListener('click', replay)
 
 
 
@@ -40,6 +30,20 @@ document.getElementById('board2').addEventListener('click', clickBoard);
 init();
 
 function init(){
+    grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
+    playerTurn.textContent = "It is X's turn";
+}
+function replay(){
+    grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
+    theWinner = 0;
+    turn = 1;
+    turnCount = 0;
+    document.getElementById("btn").style.visibility = "hidden";
+
+    for(i = 0; i < 9; i ++){
+        document.getElementById(i).textContent = "";
+    }
+    init();
 
 }
 
@@ -53,10 +57,9 @@ function clickBoard(){
         b = Math.floor(b);
     }
     
-    //if(grid[idx] !== 0) return;
+    if(grid[b][a] !== 0) return;
     
     turnCount ++;
-    //winCondition();
    
     render(idx);
     
@@ -108,32 +111,38 @@ function winCondition(){
     }
   }
   if (theWinner > 0){
-    console.log("x wins");
+    playerTurn.textContent = "X's Win";
   }else if (theWinner < 0){
-    console.log("O wins");
+    playerTurn.textContent = "O's Win";
   }
   
   
-     //   console.log(winnerWinner);
-     //   console.log(grid);
     
 }
 
 function render(){
-    changeSquare = document.getElementById(idx);
-    if(turn > 0){
-        changeSquare.textContent = "X";
-    }else if(turn < 0){
-        changeSquare.textContent = "O";
-    }
-    console.log(a);
-    console.log(b);
-    grid[b][a] = turn;
-    console.log(grid);
-    console.log(winnerWinner);
-    turn *= -1;
-    
-    winCondition();
+    if(theWinner === 0) {
+        changeSquare = document.getElementById(idx);
+        if(turn > 0){
+            changeSquare.textContent = "X";
+            playerTurn.textContent = "It is 0's turn"
+        }else if(turn < 0){
+            changeSquare.textContent = "O";
+            playerTurn.textContent = "It is X's turn"
+        }
 
+        grid[b][a] = turn;
+        console.log(grid);
+        turn *= -1;
+    
+        winCondition();
+    }
+    if (turnCount ===9 && theWinner === 0){
+        playerTurn.textContent = "Nobody Wins";
+    }
+    if(turnCount === 9 || theWinner !== 0){
+        document.getElementById("btn").style.visibility = "visible";
+
+    }
 
 }
