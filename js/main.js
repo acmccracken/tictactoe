@@ -34,7 +34,6 @@ function init(){
     playerTurn.textContent = "It is X's turn";
 }
 function replay(){
-    grid = [[0, 0, 0],[0, 0, 0], [0, 0, 0]];
     theWinner = 0;
     turn = 1;
     turnCount = 0;
